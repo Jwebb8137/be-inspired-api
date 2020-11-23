@@ -8,7 +8,7 @@
     "dev": "nodemon src/server.js",
     "predeploy": "npm audit",
     "deploy": "git push heroku master",
-    "test": "mocha"
+    "test": "mocha --require test/setup.js"
   },
   "keywords": [],
   "engines": {
