@@ -42,7 +42,7 @@ app.get('api/search-videos', function getFilteredVideos(req,res) {
     }
 )
 
-app.get('/testing', (req,res) {
+app.get('/testing', (req,res) => {
     res.send('Hello')
 })
 
