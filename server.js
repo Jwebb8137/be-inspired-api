@@ -42,7 +42,21 @@ app.get('api/search-videos', function getFilteredVideos(req,res) {
     }
 )
 
+app.get('/testing', (req,res) {
+    res.send('Hello')
+})
+
 app.get('api/user-videos', getUserVideos)
+
+app.use((error, req, res ,next) => {
+    let response
+    if (process.env.NODE_ENV === 'production') {
+        response = { error: { message: 'server error' }}
+    } else {
+        response = { error }
+    }
+    res.status(500).json(response)
+})
 
 const PORT = process.env.PORT || 8000;
 
