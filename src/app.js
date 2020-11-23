@@ -6,6 +6,14 @@ const helmet = require('helmet')
 
 const app = express()
 
+const morganOption = (process.env.NODE_ENV === 'production')
+  ? 'tiny'
+  : 'common';
+
+app.use(morgan(morganOption))
+app.use(helmet())
+app.use(cors())
+
 const videos = [
     "Sport Video: A Sport video",
     "Humor Video: A Humourous Video"
@@ -58,8 +66,4 @@ app.use((error, req, res ,next) => {
     res.status(500).json(response)
 })
 
-const PORT = process.env.PORT || 8000;
-
-app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`)
-})
+module.exports = app
