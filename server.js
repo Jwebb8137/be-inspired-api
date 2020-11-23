@@ -31,7 +31,7 @@ function getUserVideos(req, res) {
     res.json('Videos')
 }
 
-app.get('api/search-videos', function getFilteredVideos(req,res) {
+app.get('/api/search-videos', function getFilteredVideos(req,res) {
     let response = videos
         if (req.query.title) {
             response = response.filter(video =>
@@ -46,7 +46,7 @@ app.get('/testing', (req,res) => {
     res.send('Hello')
 })
 
-app.get('api/user-videos', getUserVideos)
+app.get('/api/user-videos', getUserVideos)
 
 app.use((error, req, res ,next) => {
     let response
