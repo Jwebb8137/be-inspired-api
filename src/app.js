@@ -53,6 +53,10 @@ app.get('/testing', (req,res) => {
     res.send('Hello')
 })
 
+app.post('/', (req, res) => {
+    res.send('Posted some data')
+})
+
 app.get('/api/user-videos', getUserVideos)
 
 app.use((error, req, res ,next) => {
