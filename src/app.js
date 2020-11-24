@@ -5,10 +5,13 @@ const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
 
+const userRouter = require('./user/userRouter')
+
 const morganOption = (process.env.NODE_ENV === 'production')
   ? 'tiny'
   : 'common';
 
+app.use(express.json())
 app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
@@ -34,6 +37,8 @@ app.use(function validateBearerToken(req, res, next) {
     next()
 })
 
+app.use('/api/users', userRouter)
+
 function getUserVideos(req, res) {
     res.json('Videos')
 }
@@ -53,8 +58,16 @@ app.get('/testing', (req,res) => {
     res.send('Hello')
 })
 
-app.post('/', (req, res) => {
-    res.send('Posted some data')
+app.post('/user', (req, res) => {
+    // some code
+})
+
+app.delete('/user/userId', (req, res) => {
+    const { userid } = req.params
+    // some code
+    res
+      .status(204)
+      .end();
 })
 
 app.get('/api/user-videos', getUserVideos)
