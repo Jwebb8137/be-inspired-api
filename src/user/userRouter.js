@@ -28,7 +28,8 @@ userRouter
     .post(bodyParser, (req,res) => {
         //some code
     })
-
+    
+userRouter
     .route('/:userId')
     .get((req,res) => {
         const { userId } = req.params;
