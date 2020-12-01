@@ -13,6 +13,15 @@ const knexInstance = knex({
   connection: process.env.DB_URL,
 })
 
+app.get('/api/users', (req,res,next) => {
+    const knexInstance = req.app.get('db')
+    ContentService.getAllUsers(knexInstance)
+      .then(users => {
+        res.json(users)
+      })
+      .catch(next)
+})
+
 // knexInstance('users').select('*')
 //     .then(result => {
 //         console.log(result)
@@ -150,7 +159,7 @@ app.use(function validateBearerToken(req, res, next) {
     next()
 })
 
-app.use('/api/users', userRouter)
+// app.use('/api/users', userRouter)
 
 function getUserVideos(req, res) {
     res.json('Videos')
