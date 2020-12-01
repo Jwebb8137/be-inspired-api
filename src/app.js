@@ -5,6 +5,119 @@ const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
 
+const knex = require('knex')
+const ContentService = require('./content-service')
+
+const knexInstance = knex({
+  client: 'pg',
+  connection: process.env.DB_URL,
+})
+
+// knexInstance('users').select('*')
+//     .then(result => {
+//         console.log(result)
+//     })
+
+// knexInstance.from('posts').select('*')
+//     .then(result => {
+//         console.log(result)
+//     })
+
+// knexInstance.from('post_likes').select('*')
+//     .then(result => {
+//         console.log(result)
+//     })
+
+// knexInstance
+//     .select('id', 'username')
+//     .from('users')
+//     .where({ username: 'user1' })
+//     .then(result => {
+//       console.log(result)
+//     })
+
+
+// search query example
+
+// SELECT product_id, name, price, category
+// FROM amazong_products
+// WHERE name ILIKE '%cheese%';
+
+// const searchTerm = 'holo'
+
+// knexInstance
+//   .select('product_id', 'name', 'price', 'category')
+//   .from('amazong_products')
+//   .where('name', 'ILIKE', `%${searchTerm}%`)
+//   .then(result => {
+//     console.log(result)
+//   })
+
+// function searchByProduceName(searchTerm) {
+//     knexInstance
+//       .select('product_id', 'name', 'price', 'category')
+//       .from('amazong_products')
+//       .where('name', 'ILIKE', `%${searchTerm}%`)
+//       .then(result => {
+//         console.log(result)
+//       })
+//   }
+  
+//   searchByProduceName('holo')
+
+
+// Paginate example
+
+// function paginateProducts(page) {
+//     const productsPerPage = 10
+//     const offset = productsPerPage * (page - 1)
+//     knexInstance
+//       .select('product_id', 'name', 'price', 'category')
+//       .from('amazong_products')
+//       .limit(productsPerPage)
+//       .offset(offset)
+//       .then(result => {
+//         console.log(result)
+//       })
+//   }
+  
+
+// get products with images filter example
+
+// function getProductsWithImages() {
+//     knexInstance
+//       .select('product_id', 'name', 'price', 'category', 'image')
+//       .from('amazong_products')
+//       .whereNotNull('image')
+//       .then(result => {
+//         console.log(result)
+//       })
+//   }
+  
+//   getProductsWithImages()
+
+// function mostPopularVideosForDays(days) {
+//     knexInstance
+//       .select('video_name', 'region')
+//       .count('date_viewed AS views')
+//       .where(
+//         'date_viewed',
+//         '>',
+//         knexInstance.raw(`now() - '?? days'::INTERVAL`, days)
+//       )
+//       .from('whopipe_video_views')
+//       .groupBy('video_name', 'region')
+//       .orderBy([
+//         { column: 'region', order: 'ASC' },
+//         { column: 'views', order: 'DESC' },
+//       ])
+//       .then(result => {
+//         console.log(result)
+//       })
+//   }
+  
+//   mostPopularVideosForDays(30)
+
 const userRouter = require('./user/userRouter')
 
 const morganOption = (process.env.NODE_ENV === 'production')
