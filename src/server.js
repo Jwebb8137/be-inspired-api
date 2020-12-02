@@ -12,6 +12,6 @@ app.set('db', db)
 
 const PORT = process.env.PORT || 8000
 
-app.listen(process.env.PORT, () => {
+app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`)
 })

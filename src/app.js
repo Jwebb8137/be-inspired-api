@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
+const jsonParser = express.json()
 const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
@@ -20,6 +21,20 @@ app.get('/api/users', (req,res,next) => {
         res.json(users)
       })
       .catch(next)
+})
+
+app.get('/api/users/:user_id', (req, res, next) => {
+  const knexInstance = req.app.get('db')
+  ContentService.getUserById(knexInstance, req.params.user_id)
+  .then(user => {
+    if (!user) {
+      return res.status(404).json({
+        error: { message: `User doesn't exist` }
+      })
+    }
+    res.json(user)
+  })
+  .catch(next)
 })
 
 // knexInstance('users').select('*')
@@ -148,16 +163,16 @@ app.use(morgan(morganSetting))
 app.use(helmet())
 app.use(cors())
 
-app.use(function validateBearerToken(req, res, next) {
-    const apiToken = process.env.API_TOKEN
-    const authToken = req.get('Authorization')
+// app.use(function validateBearerToken(req, res, next) {
+//     const apiToken = process.env.API_TOKEN
+//     const authToken = req.get('Authorization')
 
-    if (!authToken || authToken.split(' ')[1] !== apiToken) {
-        return res.status(401).json({ error: 'Unauthorized request' })
-    }
-    // move to the next middleware
-    next()
-})
+//     if (!authToken || authToken.split(' ')[1] !== apiToken) {
+//         return res.status(401).json({ error: 'Unauthorized request' })
+//     }
+//     // move to the next middleware
+//     next()
+// })
 
 // app.use('/api/users', userRouter)
 
@@ -180,11 +195,23 @@ app.get('/testing', (req,res) => {
     res.send('Hello')
 })
 
-app.post('/user', (req, res) => {
-    // some code
+app.post('/api/users', jsonParser, (req, res, next) => {
+    const { username, first_name, last_name } = req.body
+    const newUser = { username, first_name, last_name }
+    ContentService.insertUser(
+      req.app.get('db'),
+      newUser
+    )
+      .then(user => {
+        res
+          .status(201)
+          .location(`/api/users/${user.id}`)
+          .json(user)
+      })
+      .catch(next)
 })
 
-app.delete('/user/userId', (req, res) => {
+app.delete('/api/users/userId', (req, res) => {
     const { userid } = req.params
     // some code
     res
