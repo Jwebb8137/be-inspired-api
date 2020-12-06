@@ -1,41 +1,35 @@
 require('dotenv').config()
 const express = require('express')
+const usersRouter = require('./users/users-router')
+const commentsRouter = require('./comments/comments-router')
 const app = express()
-const jsonParser = express.json()
 const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
 
 const knex = require('knex')
-const ContentService = require('./content-service')
 
 const knexInstance = knex({
   client: 'pg',
   connection: process.env.DB_URL,
 })
 
-app.get('/api/users', (req,res,next) => {
-    const knexInstance = req.app.get('db')
-    ContentService.getAllUsers(knexInstance)
-      .then(users => {
-        res.json(users)
-      })
-      .catch(next)
-})
+const morganOption = (process.env.NODE_ENV === 'production')
+  ? 'tiny'
+  : 'common';
 
-app.get('/api/users/:user_id', (req, res, next) => {
-  const knexInstance = req.app.get('db')
-  ContentService.getUserById(knexInstance, req.params.user_id)
-  .then(user => {
-    if (!user) {
-      return res.status(404).json({
-        error: { message: `User doesn't exist` }
-      })
-    }
-    res.json(user)
-  })
-  .catch(next)
-})
+app.use(express.json())
+app.use(morgan(morganOption))
+app.use(helmet())
+app.use(cors())
+
+const morganSetting = process.env.NODE_ENV === 'production' ? 'tiny' : 'common'
+app.use(morgan(morganSetting))
+app.use(helmet())
+app.use(cors())
+
+app.use('/api/users', usersRouter)
+app.use('/api/comments', commentsRouter)
 
 // knexInstance('users').select('*')
 //     .then(result => {
@@ -142,27 +136,6 @@ app.get('/api/users/:user_id', (req, res, next) => {
   
 //   mostPopularVideosForDays(30)
 
-const userRouter = require('./user/userRouter')
-
-const morganOption = (process.env.NODE_ENV === 'production')
-  ? 'tiny'
-  : 'common';
-
-app.use(express.json())
-app.use(morgan(morganOption))
-app.use(helmet())
-app.use(cors())
-
-const videos = [
-    "Sport Video: A Sport video",
-    "Humor Video: A Humourous Video"
-]
-
-const morganSetting = process.env.NODE_ENV === 'production' ? 'tiny' : 'common'
-app.use(morgan(morganSetting))
-app.use(helmet())
-app.use(cors())
-
 // app.use(function validateBearerToken(req, res, next) {
 //     const apiToken = process.env.API_TOKEN
 //     const authToken = req.get('Authorization')
@@ -193,22 +166,6 @@ app.get('/api/search-videos', function getFilteredVideos(req,res) {
 
 app.get('/testing', (req,res) => {
     res.send('Hello')
-})
-
-app.post('/api/users', jsonParser, (req, res, next) => {
-    const { username, first_name, last_name } = req.body
-    const newUser = { username, first_name, last_name }
-    ContentService.insertUser(
-      req.app.get('db'),
-      newUser
-    )
-      .then(user => {
-        res
-          .status(201)
-          .location(`/api/users/${user.id}`)
-          .json(user)
-      })
-      .catch(next)
 })
 
 app.delete('/api/users/userId', (req, res) => {
