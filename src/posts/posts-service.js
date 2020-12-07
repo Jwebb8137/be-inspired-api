@@ -17,13 +17,13 @@ const PostsService = {
   deleteById(knex, id) {
     return knex('posts')
       .where({ id })
-      .delete()
+      .delete()  
   },
   updatePost(knex, id, newPostFields) {
     return knex('posts')
       .where({ id })
       .update(newPostFields)
-    },
+  },
 };
 
 

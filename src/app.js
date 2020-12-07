@@ -1,7 +1,9 @@
 require('dotenv').config()
 const express = require('express')
 const usersRouter = require('./users/users-router')
+const postsRouter = require('./posts/posts-router')
 const commentsRouter = require('./comments/comments-router')
+const likesRouter = require('./likes/likes-router')
 const app = express()
 const morgan = require('morgan')
 const cors = require('cors')
@@ -30,6 +32,8 @@ app.use(cors())
 
 app.use('/api/users', usersRouter)
 app.use('/api/comments', commentsRouter)
+app.use('/api/posts', postsRouter)
+app.use('/api/likes', likesRouter)
 
 // knexInstance('users').select('*')
 //     .then(result => {

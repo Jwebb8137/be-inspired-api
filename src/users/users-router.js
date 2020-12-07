@@ -25,8 +25,8 @@ usersRouter
       .catch(next)
   })
   .post(jsonParser, (req, res, next) => {
-    const { fullname, username, nickname, password } = req.body
-    const newUser = { fullname, username }
+    const { fullname, username, nickname } = req.body
+    const newUser = { fullname, username, nickname }
 
     for (const [key, value] of Object.entries(newUser)) {
       if (value == null) {
@@ -35,9 +35,6 @@ usersRouter
         })
       }
     }
-
-    newUser.nickname = nickname;
-    newUser.password = password;
 
     UsersService.insertUser(
       req.app.get('db'),
@@ -74,7 +71,7 @@ usersRouter
     res.json(serializeUser(res.user))
   })
   .delete((req, res, next) => {
-    UsersService.deleteUser(
+    UsersService.deleteById(
       req.app.get('db'),
       req.params.user_id
     )
@@ -84,8 +81,8 @@ usersRouter
       .catch(next)
   })
   .patch(jsonParser, (req, res, next) => {
-    const { fullname, username, password, nickname } = req.body
-    const userToUpdate = { fullname, username, password, nickname }
+    const { fullname, username, nickname } = req.body
+    const userToUpdate = { fullname, username, nickname }
 
     const numberOfValues = Object.values(userToUpdate).filter(Boolean).length
     if (numberOfValues === 0)

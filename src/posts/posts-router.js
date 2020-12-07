@@ -15,8 +15,8 @@ postsRouter
       .catch(next)
   })
   .post(jsonParser, (req, res, next) => {
-    const { post_id, post_description, post_uploader_id, content_url, date_created } = req.body
-    const newPost = { post_id, post_description, post_uploader_id, content_url, date_created }
+    const { post_description, post_uploader_id, content_url } = req.body
+    const newPost = { post_description, post_uploader_id, content_url }
 
     for (const [key, value] of Object.entries(newPost))
       if (value == null)
@@ -49,6 +49,40 @@ postsRouter
           })
         }
         res.json(post)
+      })
+      .catch(next)
+  })
+
+  .delete((req, res, next) => {
+    PostsService.deleteById(
+      req.app.get('db'),
+      req.params.post_id
+    )
+      .then(numRowsAffected => {
+        res.status(204).end()
+      })
+      .catch(next)
+  })
+
+  .patch(jsonParser, (req, res, next) => {
+    const { post_description, post_uploader_id, content_url } = req.body
+    const postToUpdate = { post_description, post_uploader_id, content_url }
+
+    const numberOfValues = Object.values(postToUpdate).filter(Boolean).length
+    if (numberOfValues === 0)
+      return res.status(400).json({
+        error: {
+          message: `Request body must contain either 'post description', 'post uploader id', 'content url'`
+        }
+      })
+
+    PostsService.updatePost(
+      req.app.get('db'),
+      req.params.post_id,
+      postToUpdate
+    )
+      .then(numRowsAffected => {
+        res.status(204).end()
       })
       .catch(next)
   })

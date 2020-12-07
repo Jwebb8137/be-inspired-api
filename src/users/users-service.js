@@ -11,14 +11,14 @@ const UserService = {
         return rows[0]
       })
   },
-  getUserById(knex, id) {
+  getById(knex, id) {
     return knex
       .from('users')
       .select('*')
       .where('id', id)
       .first()
   },
-  deleteUserById(knex, id) {
+  deleteById(knex, id) {
     return knex('users')
       .where({ id })
       .delete()
