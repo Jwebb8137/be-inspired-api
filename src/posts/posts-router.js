@@ -99,6 +99,7 @@ postsRouter
   .route('/media')
   .post( async (req, res) => {
     try {
+        console.log(req.body)
         const fileStr = req.body.content_url;
         const uploadResponse = await cloudinary.uploader.upload(fileStr, {
             upload_preset: 'default',
