@@ -104,7 +104,7 @@ postsRouter
         // // const uploadResponse = await cloudinary.uploader.upload(fileStr, {
         // //     upload_preset: 'default',
         // // });
-        console.log(uploadResponse);
+        // console.log(uploadResponse);
         res.json({ msg: 'yaya' });
     } catch (err) {
         console.error(err);
