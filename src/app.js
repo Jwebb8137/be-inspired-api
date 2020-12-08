@@ -41,7 +41,7 @@ app.post('/api/media', async (req, res) => {
         // const uploadResponse = await cloudinary.uploader.upload(fileStr, {
         //     upload_preset: 'default',
         // });
-        console.log(uploadResponse);
+        console.log(fileStr);
         res.json({msg: 'YAYAYAYAYA'})
     } catch (err) {
         console.error(err);
