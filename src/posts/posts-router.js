@@ -95,5 +95,21 @@ postsRouter
       })
       .catch(next)
   })
+  postsRouter
+  .route('/media')
+  .post( async (req, res) => {
+    try {
+        const fileStr = req.body.content_url;
+        const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+            upload_preset: 'dev_setups',
+        });
+        console.log(uploadResponse);
+        res.json({ msg: 'yaya' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ err: 'Something went wrong' });
+    }
+});
+
 
 module.exports = postsRouter
