@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { PORT, DATABASE_URL } = require('./config')
+const { PORT, DATABASE_URL } = require('../config')
 const express = require('express')
 const usersRouter = require('./users/users-router')
 const postsRouter = require('./posts/posts-router')
