@@ -18,12 +18,7 @@ const knexInstance = knex({
   connection: DATABASE_URL,
 })
 
-const morganOption = (process.env.NODE_ENV === 'production')
-  ? 'tiny'
-  : 'common';
-
 app.use(express.json())
-app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
 app.options('*', cors());
