@@ -47,7 +47,7 @@ app.post('/api/media', async (req, res) => {
             upload_preset: 'default',
         });
         console.log(uploadResponse);
-        res.json({msg: uploadResponse});
+        res.json({msg: 'YAYAYA'});
     } catch (err) {
         console.error(err);
         res.status(500).json({ err: 'Something went wrong' });
