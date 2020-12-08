@@ -1,6 +1,6 @@
 const express = require('express')
 const PostsService = require('./posts-service')
-
+const {cloudinary} = require('../utils/cloudinary')
 const postsRouter = express.Router()
 const jsonParser = express.json()
 
@@ -14,9 +14,18 @@ postsRouter
       })
       .catch(next)
   })
-  .post(jsonParser, (req, res, next) => {
+  .post(jsonParser, async (req, res, next) => {
     const { post_description, post_uploader_id, content_url } = req.body
     const newPost = { post_description, post_uploader_id, content_url }
+    try {
+      const uploadedResponse = (content_url) ? await cloudinary.uploader.upload(content_url, {
+        upload_preset: 'default'
+      }) : ''
+      console.log(uploadedResponse)
+      res.json({msg: "YAYAYAYAYA"}) 
+    } catch (error) {
+      
+    }
 
     for (const [key, value] of Object.entries(newPost))
       if (value == null)

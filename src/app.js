@@ -24,6 +24,9 @@ app.use(express.json())
 app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
+app.options('*', cors());
+app.use(express.json({ limit: '50mb' })); //req.body
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 const morganSetting = process.env.NODE_ENV === 'production' ? 'tiny' : 'common'
 app.use(morgan(morganSetting))

@@ -1,13 +1,13 @@
 BEGIN;
 
--- INSERT INTO users
---     (fullname, username, nickname)
--- VALUES
---   ('user1', 'Joanas', 'Schmidt'),
---   ('user2', 'Devon', 'Butler'),
---   ('user3', 'Aaron', 'Despotato'),
---   ('user4', 'Brad', 'Stevens'),
---   ('user5', 'Noah', 'Yates');
+INSERT INTO users
+    (username, first_name, last_name, user_password, profile_img_url)
+VALUES
+  ('user1', 'Joanas', 'Schmidt', 'password', 'www.cloudinary.com/profile-img1'),
+  ('user2', 'Devon', 'Butler', 'password', 'www.cloudinary.com/profile-img1'),
+  ('user3', 'Aaron', 'Despotato', 'password', 'www.cloudinary.com/profile-img1'),
+  ('user4', 'Brad', 'Stevens', 'password', 'www.cloudinary.com/profile-img1'),
+  ('user5', 'Noah', 'Yates', 'password', 'www.cloudinary.com/profile-img1');
 
 -- INSERT INTO posts 
 --     (post_uploader_id, date_created, post_description, content_url) 
@@ -18,11 +18,11 @@ BEGIN;
 --   (8, now(), 'This is a post example 4', 'https://cloudinary/example4.mp4'),
 --   (8, now(), 'This is a post example 5', 'https://cloudinary/example5.mp4');
 
-INSERT INTO 
-    post_likes (post_id, post_user_like_id) 
+-- INSERT INTO 
+--     post_likes (post_id, post_user_like_id) 
 
-VALUES
-  (3, 1);
+-- VALUES
+--   (3, 1);
   -- (27, 7),
   -- (27, 6),
   -- (26, 7),
