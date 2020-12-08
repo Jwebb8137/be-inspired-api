@@ -100,11 +100,11 @@ postsRouter
   .post( jsonParser, async (req, res, next) => {
     try {
         const fileStr = req.body.content_url;
-        // // const uploadResponse = await cloudinary.uploader.upload(fileStr, {
-        // //     upload_preset: 'default',
-        // // });
+        const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+            upload_preset: 'default',
+        });
         // console.log(uploadResponse);
-        res.json({msg: fileStr});
+        res.json({msg: uploadResponse});
     } catch (err) {
         console.error(err);
         res.status(500).json({ err: 'Something went wrong' });
