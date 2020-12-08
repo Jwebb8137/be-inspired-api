@@ -42,7 +42,7 @@ app.post('/api/media', async (req, res) => {
         upload_preset: 'default'
       })
       const photo_url = uploadedResponse.secure_url;
-      console(uploadedResponse)
+      console.log(uploadedResponse)
     } catch (err) {
         console.error(err);
         res.status(500).json({ err: 'Something went wrong' });
