@@ -1,11 +1,12 @@
 require('dotenv').config()
 const { PORT, DATABASE_URL } = require('../config')
 const express = require('express')
+const app = express()
 const usersRouter = require('./users/users-router')
 const postsRouter = require('./posts/posts-router')
 const commentsRouter = require('./comments/comments-router')
 const likesRouter = require('./likes/likes-router')
-const app = express()
+const {cloudinary} = require('../utils/cloudinary')
 const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
@@ -38,6 +39,20 @@ app.use('/api/users', usersRouter)
 app.use('/api/comments', commentsRouter)
 app.use('/api/posts', postsRouter)
 app.use('/api/likes', likesRouter)
+
+app.post('/api/media', async (req, res) => {
+    try {
+        const fileStr = req.body.content_url;
+        const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+            upload_preset: 'default',
+        });
+        console.log(uploadResponse);
+        res.json({msg: uploadResponse});
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ err: 'Something went wrong' });
+    }
+})
 
 // knexInstance('users').select('*')
 //     .then(result => {
