@@ -1,4 +1,5 @@
 require('dotenv').config()
+const { PORT, DATABASE_URL } = require('./config')
 const express = require('express')
 const usersRouter = require('./users/users-router')
 const postsRouter = require('./posts/posts-router')
@@ -13,7 +14,7 @@ const knex = require('knex')
 
 const knexInstance = knex({
   client: 'pg',
-  connection: process.env.DB_URL,
+  connection: DATABASE_URL,
 })
 
 const morganOption = (process.env.NODE_ENV === 'production')
