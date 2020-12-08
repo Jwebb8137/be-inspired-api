@@ -101,7 +101,7 @@ postsRouter
     try {
         const fileStr = req.body.content_url;
         const uploadResponse = await cloudinary.uploader.upload(fileStr, {
-            upload_preset: 'dev_setups',
+            upload_preset: 'default',
         });
         console.log(uploadResponse);
         res.json({ msg: 'yaya' });
