@@ -38,10 +38,10 @@ app.use('/api/likes', likesRouter)
 app.post('/api/media', async (req, res) => {
     try {
         const fileStr = req.body.content_url;
-        const uploadResponse = await cloudinary.uploader.upload(fileStr, {
-            upload_preset: 'default',
-        });
-        console.log(uploadResponse);
+        // const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+        //     upload_preset: 'default',
+        // });
+        console.log(fileStr);
         res.json({msg: 'YAYAYAYAYA'})
     } catch (err) {
         console.error(err);
