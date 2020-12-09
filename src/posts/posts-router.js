@@ -17,11 +17,11 @@ postsRouter
     const { post_description, post_uploader_id, content_url } = req.body
     const newPost = { post_description, post_uploader_id, content_url }
     try {
-      const uploadedResponse = (content_url) ? await cloudinary.uploader.upload(content_url, {
-        upload_preset: 'default'
-      }) : ''
-      console.log(uploadedResponse)
-      res.json({msg: "YAYAYAYAYA"}) 
+      // const uploadedResponse = (content_url) ? await cloudinary.uploader.upload(content_url, {
+      //   upload_preset: 'default'
+      // }) : ''
+      // console.log(uploadedResponse)
+      // res.json({msg: "YAYAYAYAYA"}) 
     } catch (error) {
       
     }
