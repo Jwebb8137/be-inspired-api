@@ -38,7 +38,7 @@ app.use('/api/likes', likesRouter)
 app.post('/api/media', async (req, res) => {
     try {
       const { previewSource } = req.body;
-      console.log(previewSource)
+      res.send(previewSource)
       // const uploadedResponse = await cloudinary.uploader.upload(previewSource, {
       //   upload_preset: 'inspired'
       // })
