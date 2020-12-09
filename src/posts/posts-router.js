@@ -99,7 +99,7 @@ postsRouter
 
   postsRouter
   .route('/media')
-  app.post('/media', async (req, res) => {
+  .post( async (req, res) => {
     try {
       const { previewSource } = req.body;
       const uploadedResponse = await cloudinary.uploader.upload(previewSource, {
