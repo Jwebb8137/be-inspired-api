@@ -35,19 +35,19 @@ app.use('/api/comments', commentsRouter)
 app.use('/api/posts', postsRouter)
 app.use('/api/likes', likesRouter)
 
-app.post('/api/media', async (req, res) => {
-    try {
-      const { previewSource } = req.body;
-      const uploadedResponse = await cloudinary.uploader.upload(previewSource, {
-        upload_preset: 'default'
-      })
-      const photo_url = uploadedResponse.secure_url;
-      console.log(uploadedResponse)
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ err: 'Something went wrong' });
-    }
-})
+// app.post('/api/media', async (req, res) => {
+//     try {
+//       const { previewSource } = req.body;
+//       const uploadedResponse = await cloudinary.uploader.upload(previewSource, {
+//         upload_preset: 'default'
+//       })
+//       const photo_url = uploadedResponse.secure_url;
+//       console.log(uploadedResponse)
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).json({ err: 'Something went wrong' });
+//     }
+// })
 
 // knexInstance('users').select('*')
 //     .then(result => {
