@@ -39,7 +39,7 @@ app.post('/api/media', async (req, res) => {
     try {
       const { previewSource } = req.body;
       const uploadedResponse = await cloudinary.uploader.upload(previewSource, {
-        upload_preset: 'default'
+        upload_preset: 'inspired'
       })
       const photo_url = uploadedResponse.secure_url;
       console.log(uploadedResponse)
