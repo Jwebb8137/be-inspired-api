@@ -38,11 +38,12 @@ app.use('/api/likes', likesRouter)
 app.post('/api/media', async (req, res) => {
     try {
       const { previewSource } = req.body;
-      const uploadedResponse = await cloudinary.uploader.upload(previewSource, {
-        upload_preset: 'inspired'
-      })
-      const photo_url = uploadedResponse.secure_url;
-      console.log(uploadedResponse)
+      console.log(previewSource)
+      // const uploadedResponse = await cloudinary.uploader.upload(previewSource, {
+      //   upload_preset: 'inspired'
+      // })
+      // const photo_url = uploadedResponse.secure_url;
+      // console.log(uploadedResponse)
     } catch (err) {
         console.error(err);
         res.status(500).json({ err: 'Something went wrong' });
