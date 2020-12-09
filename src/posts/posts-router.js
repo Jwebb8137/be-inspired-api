@@ -1,6 +1,5 @@
 const express = require('express')
 const PostsService = require('./posts-service')
-const {cloudinary} = require('../utils/cloudinary')
 const postsRouter = express.Router()
 const jsonParser = express.json()
 
@@ -95,22 +94,5 @@ postsRouter
       })
       .catch(next)
   })
-  postsRouter
-  .route('/media')
-  .post( jsonParser, async (req, res ) => {
-    try {
-      const { previewSource } = req.body;
-      const uploadedResponse = await cloudinary.uploader.upload(previewSource, {
-        upload_preset: 'default'
-      })
-      const content_url = uploadedResponse.secure_url;
-      console.log(uploadedResponse)
-      console.log(content_url)
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ err: 'Something went wrong' });
-    }
-});
-
 
 module.exports = postsRouter
