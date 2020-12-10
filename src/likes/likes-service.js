@@ -20,7 +20,7 @@ const LikesService = {
       .select('*')
       .count()
       .from('post_likes')
-      .where('id', id)
+      .where('post_id', id)
       .first()
   },
 
