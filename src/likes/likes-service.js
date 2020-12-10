@@ -18,6 +18,9 @@ const LikesService = {
 
   getLikesByPostId(knex, id) {
     return knex.raw(`SELECT COUNT(*) FROM post_likes WHERE post_id=${id}`)
+    .then(rows => {
+      return rows[0]
+    })
   },
 
   // deleteLike(knex, id) {
