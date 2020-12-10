@@ -48,13 +48,9 @@ likesRouter
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
     LikesService.getLikesByPostId(knexInstance, req.params.post_id)
-      .then(like => {
-        if (!like) {
-          res.like = null
-        }
-        res.like = like
-        next()
-      })
+      .then(
+        res.json("getting like by id")
+      )
       .catch(next)
   })
   .delete((req, res, next) => {
