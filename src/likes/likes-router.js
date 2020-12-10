@@ -15,7 +15,7 @@ likesRouter
   .route('/')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
-    LikesService.getAllLikes(knexInstance)
+    LikesService.getAllLikes(knexInstance, postId)
       .then(likes => {
         res.json(likes.map(serializeLike))
       })
@@ -45,10 +45,10 @@ likesRouter
   })
 
 likesRouter
-  .route('/:like_id')
+  .route('/:post_id')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
-    LikesService.getLikesByPostId(knexInstance, req.params.like_id)
+    LikesService.getLikesByPostId(knexInstance, req.params.post_id)
       .then(likes => {
         res.json(likes.map(serializeLike))
       })
