@@ -20,6 +20,7 @@ const LikesService = {
       .select('*')
       .from('post_likes')
       .where('post_id', id)
+      .count()
   },
 
   getById(knex, id) {
