@@ -49,9 +49,8 @@ likesRouter
     const knexInstance = req.app.get('db')
     LikesService.getLikesByPostId(knexInstance, req.params.post_id)
       .then(like => {
-        res
-          .status(201)
-          .json(serializeLike(like))
+        res.like = like
+        next()
       })
       .catch(next)
   })
