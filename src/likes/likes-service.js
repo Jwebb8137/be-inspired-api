@@ -1,6 +1,9 @@
 const LikesService = {
-  getAllLikes(knex) {
-    return knex.select('*').from('post_likes')
+  getAllLikes(knex, id) {
+    return knex
+    .select('*')
+      .from('post_likes')
+      .where('post_id', id)
   },
 
   insertLike(knex, newLike) {
@@ -14,10 +17,7 @@ const LikesService = {
   },
 
   getLikesByPostId(knex, id) {
-    return knex
-      .select('*')
-      .from('post_likes')
-      .where('post_id', id)
+    return knex.raw(`SELECT COUNT(*) FROM post_likes WHERE post_id=${id}`)
   },
 
   // deleteLike(knex, id) {
