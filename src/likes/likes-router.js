@@ -47,9 +47,24 @@ likesRouter
   .route('/:post_id')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
+    PostsService.getById(knexInstance, req.params.post_id)
+      .then(post => {
+        if (!post) {
+          return res.status(404).json({
+            error: { message: `Post doesn't exist` }
+          })
+        }
+        res.json(post)
+      })
+      .catch(next)
+  })
+  .get((req, res, next) => {
+    const knexInstance = req.app.get('db')
     LikesService.getLikesByPostId(knexInstance, req.params.post_id)
       .then(like => {
-        res.json(serializeLike(like))
+        res
+          .status(201)
+          .json(like)
       })
       .catch(next)
   })
