@@ -16,15 +16,6 @@ postsRouter
   .post(jsonParser, async (req, res, next) => {
     const { post_description, post_uploader_id, content_url } = req.body
     const newPost = { post_description, post_uploader_id, content_url }
-    try {
-      const uploadedResponse = (content_url) ? await cloudinary.uploader.upload(content_url, {
-        upload_preset: 'default'
-      }) : ''
-      console.log(uploadedResponse)
-      res.json({msg: "YAYAYAYAYA"}) 
-    } catch (error) {
-      
-    }
 
     for (const [key, value] of Object.entries(newPost))
       if (value == null)
@@ -39,7 +30,6 @@ postsRouter
       .then(post => {
         res
           .status(201)
-          .location(`/posts/${post.id}`)
           .json(post)
       })
       .catch(next)
