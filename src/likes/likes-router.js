@@ -51,7 +51,7 @@ likesRouter
       .then(like => {
         res
           .status(201)
-          .json(like)
+          .json(serializeLike(like))
       })
       .catch(next)
   })
