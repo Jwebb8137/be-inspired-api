@@ -50,7 +50,7 @@ likesRouter
     LikesService.getLikesByPostId(knexInstance, req.params.post_id)
       .then(like => {
         if (!user) {
-          res.like = 0
+          res.like = null
         }
         res.like = like
         next()
