@@ -18,7 +18,6 @@ const LikesService = {
   getLikesByPostId(knex, id) {
     return knex
       .select('*')
-      .count()
       .from('post_likes')
       .where('post_id', id)
       .first()
