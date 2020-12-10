@@ -35,10 +35,9 @@ likesRouter
       req.app.get('db'),
       newLike
     )
-      .then(comment => {
+      .then(like => {
         res
           .status(201)
-          .location(path.posix.join(req.originalUrl, `/${like.id}`))
           .json(serializeLike(like))
       })
       .catch(next)
