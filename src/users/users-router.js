@@ -28,7 +28,7 @@ usersRouter
       .catch(next)
   })
 
-  .post( async (req, res ) => {
+  .post( jsonParser, async (req, res ) => {
     const { username, first_name, last_name, user_password, profile_img_url } = req.body
     try {
       //check for existing user (if so throw error)
