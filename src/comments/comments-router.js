@@ -48,22 +48,6 @@ commentsRouter
 
 commentsRouter
   .route('/:post_id')
-  .all((req, res, next) => {
-    CommentsService.getById(
-      req.app.get('db'),
-      req.params.comment_id
-    )
-      .then(comment => {
-        if (!comment) {
-          return res.status(404).json({
-            error: { message: `Comment doesn't exist` }
-          })
-        }
-        res.comment = comment
-        next()
-      })
-      .catch(next)
-  })
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
     CommentsService.getAllComments(knexInstance, req.params.post_id)
