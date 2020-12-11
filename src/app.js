@@ -52,14 +52,14 @@ app.post('/api/media', async (req, res) => {
 
 //JWT VERIFICATION
 
-app.get("/api/is-verified", authorization, async (req, res) => {
-  try {
-    res.json(true); 
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error")
-  }
-})
+// app.get("/api/is-verified", authorization, async (req, res) => {
+//   try {
+//     res.json(true); 
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error")
+//   }
+// })
 
 // knexInstance('users').select('*')
 //     .then(result => {
