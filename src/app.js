@@ -31,35 +31,22 @@ app.use(morgan(morganSetting))
 app.use(helmet())
 app.use(cors())
 
+//JWT VERIFICATION
+
+app.get('/api/is-verified', authorization, async (req, res) => {
+  try {
+    res.json(true); 
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error')
+  }
+})
+
 app.use('/api/users', usersRouter)
 app.use('/api/comments', commentsRouter)
 app.use('/api/posts', postsRouter)
 app.use('/api/likes', likesRouter)
 
-app.post('/api/media', async (req, res) => {
-    try {
-      const { previewSource } = req.body;
-      const uploadedResponse = await cloudinary.uploader.upload(previewSource, {
-        upload_preset: 'inspired'
-      })
-      const photo_url = uploadedResponse.secure_url;
-      console.log(uploadedResponse)
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ err: 'Something went wrong' });
-    }
-})
-
-//JWT VERIFICATION
-
-app.get("/api/is-verified", authorization, async (req, res) => {
-  try {
-    res.json(true); 
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error")
-  }
-})
 
 // knexInstance('users').select('*')
 //     .then(result => {
@@ -179,43 +166,6 @@ app.get("/api/is-verified", authorization, async (req, res) => {
 
 // app.use('/api/users', userRouter)
 
-function getUserVideos(req, res) {
-    res.json('Videos')
-}
 
-app.get('/api/search-videos', function getFilteredVideos(req,res) {
-    let response = videos
-        if (req.query.title) {
-            response = response.filter(video =>
-                video.title.toLowerCase().includes(req.query.title.toLowerCase())
-            )
-        }
-        res.json(response)
-    }
-)
-
-app.get('/testing', (req,res) => {
-    res.send('Hello')
-})
-
-app.delete('/api/users/userId', (req, res) => {
-    const { userid } = req.params
-    // some code
-    res
-      .status(204)
-      .end();
-})
-
-app.get('/api/user-videos', getUserVideos)
-
-app.use((error, req, res ,next) => {
-    let response
-    if (process.env.NODE_ENV === 'production') {
-        response = { error: { message: 'server error' }}
-    } else {
-        response = { error }
-    }
-    res.status(500).json(response)
-})
 
 module.exports = app
