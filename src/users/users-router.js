@@ -6,7 +6,7 @@ const UsersService = require('./users-service')
 const usersRouter = express.Router()
 const jsonParser = express.json()
 const bcrypt = require("bcrypt");
-const jwtGenerator = require("../../utils/jwtGenerator");
+const jwtGenerator = require("../utils/jwtGenerator");
 
 const serializeUser = user => ({
   id: user.id,
@@ -27,8 +27,6 @@ usersRouter
       })
       .catch(next)
   })
-
-
 
   .post( async (req, res ) => {
     const { username, first_name, last_name, user_password, profile_img_url } = req.body
