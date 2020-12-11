@@ -28,30 +28,30 @@ usersRouter
       .catch(next)
   })
 
-  .post( jsonParser, async (req, res ) => {
-    const { username, first_name, last_name, user_password, profile_img_url } = req.body
-    try {
-      //check for existing user (if so throw error)
-      const user = await pool.query("SELECT * FROM users WHERE username = $1", [username])   
-      if(user.rows.length !== 0) {
-        return res.status(401).send("User already exists");
-      }
-      //Bcrypt password
-      const saltRounds = 10;
-      const salt = await bcrypt.genSalt(saltRounds);
-      const bcryptPassword = await bcrypt.hash(user_password, salt);
-      //if no user exists
-      const newUser = await pool.query("INSERT INTO users (username, user_password, first_name, last_name, profile_img_url) VALUES($1, $2, $3, $4, $5) RETURNING *",
-        [username, bcryptPassword, first_name, last_name, profile_img_url]
-      );
-      // generate jwt token
-      const token = jwtGenerator(newUser.rows[0].user_id);
-      res.json({ token })
-    } catch (err) {
-      console.log(err.message)
-      res.status(500).json({err: 'Something went wrong'})
-    }
-  })
+  // .post( async (req, res ) => {
+  //   const { username, first_name, last_name, user_password, profile_img_url } = req.body
+  //   try {
+  //     //check for existing user (if so throw error)
+  //     const user = await pool.query("SELECT * FROM users WHERE username = $1", [username])   
+  //     if(user.rows.length !== 0) {
+  //       return res.status(401).send("User already exists");
+  //     }
+  //     //Bcrypt password
+  //     const saltRounds = 10;
+  //     const salt = await bcrypt.genSalt(saltRounds);
+  //     const bcryptPassword = await bcrypt.hash(user_password, salt);
+  //     //if no user exists
+  //     const newUser = await pool.query("INSERT INTO users (username, user_password, first_name, last_name, profile_img_url) VALUES($1, $2, $3, $4, $5) RETURNING *",
+  //       [username, bcryptPassword, first_name, last_name, profile_img_url]
+  //     );
+  //     // generate jwt token
+  //     const token = jwtGenerator(newUser.rows[0].user_id);
+  //     res.json({ token })
+  //   } catch (err) {
+  //     console.log(err.message)
+  //     res.status(500).json({err: 'Something went wrong'})
+  //   }
+  // })
 
 usersRouter
   .route('/:user_id')
