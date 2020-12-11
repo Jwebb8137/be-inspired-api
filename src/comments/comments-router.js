@@ -47,7 +47,7 @@ commentsRouter
   })
 
 commentsRouter
-  .route('/:comment_id')
+  .route('/:post_id')
   .all((req, res, next) => {
     CommentsService.getById(
       req.app.get('db'),
@@ -65,7 +65,12 @@ commentsRouter
       .catch(next)
   })
   .get((req, res, next) => {
-    res.json(serializeComment(res.comment))
+    const knexInstance = req.app.get('db')
+    CommentsService.getAllComments(knexInstance, req.params.post_id)
+      .then(comments => {
+        res.json(comments.map(serializeComment))
+      })
+      .catch(next)
   })
   .delete((req, res, next) => {
     CommentsService.deleteComment(

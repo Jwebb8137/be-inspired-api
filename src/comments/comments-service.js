@@ -1,6 +1,9 @@
 const CommentsService = {
-  getAllComments(knex) {
-    return knex.select('*').from('comments')
+  getAllComments(knex, id) {
+    return knex
+    .select('*')
+      .from('comments')
+      .where('post_id', id)
   },
 
   insertComment(knex, newComment) {
