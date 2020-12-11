@@ -2,6 +2,7 @@ require('dotenv').config()
 const { PORT, DATABASE_URL } = require('../config')
 const express = require('express')
 const app = express()
+const authorization = require('./middleware/authorization')
 const usersRouter = require('./users/users-router')
 const postsRouter = require('./posts/posts-router')
 const commentsRouter = require('./comments/comments-router')
@@ -47,6 +48,17 @@ app.post('/api/media', async (req, res) => {
         console.error(err);
         res.status(500).json({ err: 'Something went wrong' });
     }
+})
+
+//JWT VERIFICATION
+
+app.get("/api/is-verified", authorization, async (req, res) => {
+  try {
+    res.json(true); 
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error")
+  }
 })
 
 // knexInstance('users').select('*')
