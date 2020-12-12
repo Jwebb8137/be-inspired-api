@@ -46,6 +46,7 @@ app.use('/api/users', usersRouter)
 app.use('/api/comments', commentsRouter)
 app.use('/api/posts', postsRouter)
 app.use('/api/likes', likesRouter)
+app.use("/api/login", require("./users/login"));
 
 
 // knexInstance('users').select('*')
