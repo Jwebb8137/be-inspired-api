@@ -12,6 +12,7 @@ router.post("/", async (req, res) => {
     if (user.rows.length === 0) {
       return res.status(401).send("Password or username does is incorrect")
     }
+    const userInfo = user.rows[0]
     //3. check if password is correct
     const validPassword = await bcrypt.compare(passwordInput, user.rows[0].user_password);
     if(!validPassword) {
@@ -19,7 +20,7 @@ router.post("/", async (req, res) => {
     };
     //4. issue jwt token
     const token = jwtGenerator(user.rows[0].id);
-    res.json({ token, user })
+    res.json({ token, userInfo })
   } catch (err) {
     console.error(err.message)
   }
