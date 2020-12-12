@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
     };
     //4. issue jwt token
     const token = jwtGenerator(user.rows[0].id);
-    res.json({ token })
+    res.json({ token, user })
   } catch (err) {
     console.error(err.message)
   }
