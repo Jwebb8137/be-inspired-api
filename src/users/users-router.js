@@ -44,9 +44,10 @@ usersRouter
       const newUser = await pool.query("INSERT INTO users (username, user_password, first_name, last_name, profile_img_url) VALUES($1, $2, $3, $4, $5) RETURNING *",
         [username, bcryptPassword, first_name, last_name, profile_img_url]
       );
+      const userInfo = user.rows[0]
       // generate jwt token
       const token = jwtGenerator(newUser.rows[0].user_id);
-      res.json({ token })
+      res.json({ token, userInfo })
     } catch (err) {
       console.log(err.message)
       res.status(500).json({err: 'Something went wrong'})
