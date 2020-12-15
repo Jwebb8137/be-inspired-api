@@ -3,7 +3,7 @@ const CommentsService = {
     return knex
       .join('users', 'comments')
       .select('*')
-      .where({user_id: id})
+      .where({id: user_id})
   },
 
   insertComment(knex, newComment) {
