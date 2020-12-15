@@ -48,6 +48,27 @@ commentsRouter
 
 commentsRouter
   .route('/:post_id')
+  .post(jsonParser, (req, res, next) => {
+    const { post_id, comment, user_id, user_img_url, username } = req.body
+    const newComment = { post_id, comment, user_id, user_img_url, username }
+
+    for (const [key, value] of Object.entries(newComment))
+      if (value == null)
+        return res.status(400).json({
+          error: { message: `Missing '${key}' in request body` }
+        })
+
+    CommentsService.insertComment(
+      req.app.get('db'),
+      newComment
+    )
+      .then(comment => {
+        res
+          .status(201)
+          .json(serializeComment(comment))
+      })
+      .catch(next)
+  })
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
     CommentsService.getAllComments(knexInstance, req.params.post_id)
