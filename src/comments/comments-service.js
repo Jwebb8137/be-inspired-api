@@ -4,7 +4,7 @@ const CommentsService = {
       .select('*')
       .from('comments')
       .where('post_id', id)
-      .innerJoin('users', 'user_id', 'users.id')
+      .join('users', 'user_id', 'users.id')
   },
 
   insertComment(knex, newComment) {
