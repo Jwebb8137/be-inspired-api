@@ -3,7 +3,7 @@ const CommentsService = {
     return knex
       .from('comments')
       .where('post_id', id)
-      .innerJoin('users', 'comments.user_id', 'users.id')
+      .innerJoin('users', 'comments.user_id', 'users')
   },
 
   insertComment(knex, newComment) {
