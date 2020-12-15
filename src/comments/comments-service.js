@@ -1,9 +1,9 @@
 const CommentsService = {
   getAllComments(knex, id) {
     return knex
+      .where('post_id', id)
       .join('users', 'comments.user_id', 'users.id')
       .select('*')
-      .where('post_id', id)
   },
 
   insertComment(knex, newComment) {
