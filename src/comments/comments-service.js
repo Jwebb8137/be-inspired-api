@@ -3,8 +3,8 @@ const CommentsService = {
     return knex
       .select('*')
       .from('comments')
-      .where('post_id', id)
       .fullOuterJoin('users', 'comments.user_id', 'users.id')
+      .where('post_id', id)
   },
 
   insertComment(knex, newComment) {
