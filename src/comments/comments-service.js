@@ -1,6 +1,7 @@
 const CommentsService = {
   getAllComments(knex, id) {
     return knex
+      .from('comments')
       .where('post_id', id)
       .join('users', 'comments.user_id', 'users.id')
       .select('*')
