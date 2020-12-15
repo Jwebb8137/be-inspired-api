@@ -25,8 +25,8 @@ commentsRouter
       .catch(next)
   })
   .post(jsonParser, (req, res, next) => {
-    const { post_id, comment, user_id } = req.body
-    const newComment = { post_id, comment, user_id }
+    const { post_id, comment, user_id, user_img_url, username } = req.body
+    const newComment = { post_id, comment, user_id, user_img_url, username }
 
     for (const [key, value] of Object.entries(newComment))
       if (value == null)
