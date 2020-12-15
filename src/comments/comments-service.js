@@ -1,10 +1,6 @@
 const CommentsService = {
   getAllComments(knex, id) {
-    return knex
-      .select('*')
-      .from('comments')
-      .where('post_id', id)
-      .join('users', {'comments.user_id': 'users.id'})
+    return knex.select('*').from('comments').join(knex.raw('natural full join users')).where('comments.user_id', 'users.id')
   },
 
   insertComment(knex, newComment) {
