@@ -11,7 +11,7 @@ postsRouter
       knexInstance
         .select('*')
         .from('posts')
-        .where('posts', 'ILIKE', `%${searchTerm}%`)
+        .where('post_description', 'ILIKE', `%${searchTerm}%`)
         .then(posts => {
           res.json(posts)
         }) 
