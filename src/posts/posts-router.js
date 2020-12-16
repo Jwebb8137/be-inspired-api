@@ -4,6 +4,21 @@ const postsRouter = express.Router()
 const jsonParser = express.json()
 
 postsRouter
+  .route('/search')
+  .get((req, res, next) => {
+    const {searchTerm} = req.body
+    const knexInstance = req.app.get('db')
+      knexInstance
+        .select('*')
+        .from('posts')
+        .where('posts', 'ILIKE', `%${searchTerm}%`)
+        .then(posts => {
+          res.json(posts)
+        }) 
+      .catch(next)
+  })
+
+postsRouter
   .route('/')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
