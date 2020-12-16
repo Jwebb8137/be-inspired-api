@@ -6,7 +6,7 @@ const jsonParser = express.json()
 postsRouter
   .route('/search')
   .get((req, res, next) => {
-    const {searchTerm} = req.body
+    const searchTerm = req.query.q
     const knexInstance = req.app.get('db')
       knexInstance
         .select('*')
