@@ -22,7 +22,7 @@ postsRouter
   .route('/')
   .get((req, res, next) => {
     const page = req.query.page
-    const limit = 25
+    const limit = 10
     const offset = limit * (page - 1)
     const knexInstance = req.app.get('db')
     PostsService.getAllPosts(knexInstance, limit, offset)
