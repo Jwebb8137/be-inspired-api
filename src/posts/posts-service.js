@@ -1,3 +1,4 @@
+const PostsService = {
 //     const offset = productsPerPage * (page - 1)
 //     knexInstance
 //       .select('product_id', 'name', 'price', 'category')
