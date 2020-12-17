@@ -54,10 +54,10 @@ postsRouter
   })
 
 postsRouter
-  .route('/:post_id')
+  .route('/:UserId')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
-    PostsService.getById(knexInstance, req.params.post_id)
+    PostsService.getPostsByUserId(knexInstance, req.params.UserId)
       .then(post => {
         if (!post) {
           return res.status(404).json({

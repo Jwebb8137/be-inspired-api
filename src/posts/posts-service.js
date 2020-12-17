@@ -24,8 +24,11 @@ const PostsService = {
         return rows[0]
       })
   },
-  getById(knex, id) {
-    return knex.from('posts').select('*').where('id', id).first()
+  getPostsByUserId(knex, id) {
+    return knex
+      .select('*')
+      .from('posts')
+      .where('post_uploader_id', id)
   },
   deleteById(knex, id) {
     return knex('posts')
