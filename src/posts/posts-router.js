@@ -54,6 +54,19 @@ postsRouter
   })
 
 postsRouter
+  .route('/delete/:PostId')
+  .delete((req, res, next) => {
+    PostsService.deleteById(
+      req.app.get('db'),
+      req.params.postId
+    )
+      .then(numRowsAffected => {
+        res.status(204).end()
+      })
+      .catch(next)
+  })
+
+postsRouter
   .route('/:UserId')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
@@ -65,17 +78,6 @@ postsRouter
           })
         }
         res.json(post)
-      })
-      .catch(next)
-  })
-
-  .delete((req, res, next) => {
-    PostsService.deleteById(
-      req.app.get('db'),
-      req.params.post_id
-    )
-      .then(numRowsAffected => {
-        res.status(204).end()
       })
       .catch(next)
   })
