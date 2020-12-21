@@ -49,6 +49,19 @@ commentsRouter
   })
 
 commentsRouter
+  .route('/delete/:commentId')
+  .delete((req, res, next) => {
+    CommentsService.deleteComment(
+      req.app.get('db'),
+      req.params.commentId
+    )
+      .then(numRowsAffected => {
+        res.status(204).end()
+      })
+      .catch(next)
+  })
+
+commentsRouter
   .route('/:post_id')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
