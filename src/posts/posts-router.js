@@ -58,7 +58,7 @@ postsRouter
   .delete((req, res, next) => {
     PostsService.deleteById(
       req.app.get('db'),
-      req.params.postId
+      req.params.PostId
     )
       .then(numRowsAffected => {
         res.status(204).end()
