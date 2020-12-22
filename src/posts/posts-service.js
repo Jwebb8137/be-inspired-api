@@ -12,6 +12,7 @@ const PostsService = {
     return knex
       .select('*')
       .from('posts')
+      .orderBy('date_created', 'desc')
       .limit(limit)
       .offset(offset)
   },
