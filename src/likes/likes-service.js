@@ -5,7 +5,6 @@ const LikesService = {
       .from('post_likes')
       .where('post_id', id)
   },
-
   insertLike(knex, newLike) {
     return knex
       .insert(newLike)
@@ -22,16 +21,9 @@ const LikesService = {
       .where('post_id', id)
       .count()
   },
-
   getById(knex, id) {
     return knex.from('posts').select('*').where('id', id).first()
   },
-
-  // deleteLike(knex, id) {
-  //   return knex('post_likes')
-  //     .where({ post_id })
-  //     .delete()
-  // }
 }
 
 module.exports = LikesService

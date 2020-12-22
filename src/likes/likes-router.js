@@ -24,7 +24,6 @@ likesRouter
   .post(jsonParser, (req, res, next) => {
     const { post_id, post_user_like_id } = req.body
     const newLike = { post_id, post_user_like_id }
-
     for (const [key, value] of Object.entries(newLike))
       if (value == null)
         return res.status(400).json({

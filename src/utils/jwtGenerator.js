@@ -5,7 +5,6 @@ function jwtGenerator(username) {
   const payload = {
     user: username
   }
-
   return jwt.sign(payload, process.env.jwtSecret)
 }
 

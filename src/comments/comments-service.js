@@ -5,7 +5,6 @@ const CommentsService = {
       .from('comments')
       .where('post_id', id)
   },
-
   insertComment(knex, newComment) {
     return knex
       .insert(newComment)
@@ -15,7 +14,6 @@ const CommentsService = {
         return rows[0]
       })
   },
-
   getById(knex, id) {
     return knex
       .from('comments')
@@ -23,13 +21,11 @@ const CommentsService = {
       .where('id', id)
       .first()
   },
-
   deleteComment(knex, id) {
     return knex('comments')
       .where({ id })
       .delete()
   },
-
   updateComment(knex, id, newCommentFields) {
     return knex('comments')
       .where({ id })

@@ -1,13 +1,4 @@
 const PostsService = {
-//     const offset = productsPerPage * (page - 1)
-//     knexInstance
-//       .select('product_id', 'name', 'price', 'category')
-//       .from('amazong_products')
-//       .limit(productsPerPage)
-//       .offset(offset)
-//       .then(result => {
-//         console.log(result)
-//       })
   getAllPosts(knex, limit, offset) {
     return knex
       .select('*')
@@ -42,7 +33,6 @@ const PostsService = {
       .where({ id })
       .update(newPostFields)
   },
-};
-
+}
 
 module.exports = PostsService;
