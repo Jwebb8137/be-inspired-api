@@ -30,6 +30,7 @@ const PostsService = {
       .select('*')
       .from('posts')
       .where('post_uploader_id', id)
+      .orderBy('date_created', 'desc')
   },
   deleteById(knex, id) {
     return knex('posts')
