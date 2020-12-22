@@ -30,7 +30,7 @@ it('retrieves target user, as expected', function(done) {
   });
 });
 
-it('creates a user, as expected', function(done) { 
+it('creates a user if it does not exist, as expected', function(done) { 
   chai.request('https://be-inspired-api.herokuapp.com')
   .post('/api/users')
   .set({
