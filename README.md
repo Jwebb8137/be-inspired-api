@@ -344,7 +344,7 @@ Create a comment and store it in the database.
 ### Success Response
 **Code** : `201 OK`
 
-### Get Likes
+## Get Likes
 
 Retrieve all likes from the database.
 
@@ -414,7 +414,7 @@ Retrieves a list of likes from the database relating to a specific post id.
   ]
 ```
 
-### Create A Like
+## Create A Like
 
 Create a like and store it in the database.
 
@@ -462,10 +462,10 @@ Logs in user and issues token.
 ### Success Response
 **Code** : `201 OK`
 
+User is issued an active token
+
 ### Failure Response
 **Code** : `401 Unauthorized`
-
-User is issued an active token
 
 ## Additional Information
 <p>This application was designed and developed as part of a full-stack project that required developing an application using the PERN stack. As my second full-stack project I decided to construct a social media platform that would allow me to gain valuable experience in the overall design and implementation of a more complex database / backend. Accomplishing just that I really enjoyed creating this application, giving me the opportunity to create something I am passionate about!</p>  
