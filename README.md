@@ -1,12 +1,12 @@
 <h1>Be-Inspired API</h1>
 
-<img src="https://res.cloudinary.com/dvkqz0fed/image/upload/v1608705451/be-inspired-media/atlassian-icon_2_je54tx.png" width="200"/>
+<img src="https://res.cloudinary.com/dvkqz0fed/image/upload/v1608705451/be-inspired-media/atlassian-icon_2_je54tx.png" width="150"/>
 
 <p>Aiming to create a social media platform geared towards promoting a positive and motivating experience Be-Inspired allows users to post and explore inspiring content uploaded by other users!</p>
 
 ## Endpoints
 
-### Get Users
+## Get Users
 
 Retrieve all active users from the database.
 
@@ -18,7 +18,7 @@ Retrieve all active users from the database.
 
 **Permissions required** : None
 
-## Success Response
+### Success Response
 
 **Code** : `200 OK`
 
@@ -50,11 +50,11 @@ Retrieve all active users from the database.
 ]
 ```
 
-### Get User By Id
+## Get User By Id
 
 Retrieve a specific user from the database.
 
-**URL** : `/api/users/:userid`
+**URL** : `/api/users/:user_id`
 
 **Method** : `GET`
 
@@ -62,7 +62,7 @@ Retrieve a specific user from the database.
 
 **Permissions required** : None
 
-## Success Response
+### Success Response
 
 **Code** : `200 OK`
 
@@ -78,11 +78,11 @@ Retrieve a specific user from the database.
   }
 ```
 
-### Create A User
+## Create A User
 
 Create a user and store their information in the database.
 
-**URL** : `/api/users/:userid`
+**URL** : `/api/users`
 
 **Method** : `POST`
 
@@ -90,7 +90,7 @@ Create a user and store their information in the database.
 
 **Permissions required** : None
 
-## Sample Request Object 
+### Sample Request Object 
 
 ```json
   {
@@ -101,12 +101,12 @@ Create a user and store their information in the database.
   }
 ```
 
-## Success Response
+### Success Response
 **Code** : `201 OK`
 
-### Get Posts
+## Get Posts
 
-Retrieve all active users from the database.
+Retrieve all active posts from the database.
 
 **URL** : `/api/posts/`
 
@@ -116,7 +116,7 @@ Retrieve all active users from the database.
 
 **Permissions required** : None
 
-## Success Response
+### Success Response
 
 **Code** : `200 OK`
 
@@ -148,7 +148,7 @@ Retrieve all active users from the database.
   ]
 ```
 
-### Get Posts By A Specific User Id
+## Get Posts By A Specific User Id
 
 Retrieve a specific post from the database.
 
@@ -160,23 +160,39 @@ Retrieve a specific post from the database.
 
 **Permissions required** : None
 
-## Success Response
+### Success Response
 
 **Code** : `200 OK`
 
 **Success Response**
 
 ```json
-  {
-    "id": 3,
-    "post_uploader_id": "5",
-    "date_created": "2020-12-24 03:54:36.53617+00",
-    "post_description": "This is a third example of a post description!",
-    "content_url": "https://res.cloudinary.com/dvkqz0fed/image/upload/v1608618987/be-inspired-media/asdf84cv84asg98u09wer.jpg"
-  }
+  [
+    {
+      "id": 1,
+      "post_uploader_id": "2",
+      "date_created": "2020-12-22 06:33:36.53617+00",
+      "post_description": "This is an example of a post description!",
+      "content_url": "https://res.cloudinary.com/dvkqz0fed/image/upload/v1608618987/be-inspired-media/episivbvc6eygymc9mk6.jpg"
+    },
+    {
+      "id": 2,
+      "post_uploader_id": "2",
+      "date_created": "2020-12-23 09:43:36.53617+00",
+      "post_description": "This is another example of a post description!",
+      "content_url": "https://res.cloudinary.com/dvkqz0fed/image/upload/v1608618987/be-inspired-media/asdivjwer872u3riojsd.jpg"
+    },
+    {
+      "id": 3,
+      "post_uploader_id": "2",
+      "date_created": "2020-12-24 03:54:36.53617+00",
+      "post_description": "This is a third example of a post description!",
+      "content_url": "https://res.cloudinary.com/dvkqz0fed/image/upload/v1608618987/be-inspired-media/asdf84cv84asg98u09wer.jpg"
+    }
+  ]
 ```
 
-### Create A Post
+## Create A Post
 
 Create a post and store the information in the database.
 
@@ -188,7 +204,7 @@ Create a post and store the information in the database.
 
 **Permissions required** : None
 
-## Sample Request Object 
+### Sample Request Object 
 
 ```json
   {
@@ -198,10 +214,10 @@ Create a post and store the information in the database.
   }
 ```
 
-## Success Response
+### Success Response
 **Code** : `201 OK`
 
-### Get Comments
+## Get Comments
 
 Retrieve all comments from the database.
 
@@ -213,7 +229,7 @@ Retrieve all comments from the database.
 
 **Permissions required** : None
 
-## Success Response
+### Success Response
 
 **Code** : `200 OK`
 
@@ -251,7 +267,7 @@ Retrieve all comments from the database.
   ]
 ```
 
-### Get Comments By A Specific Post Id
+## Get Comments By A Specific Post Id
 
 Retrieves a list of comments from the database relating to a specific post id.
 
@@ -263,7 +279,7 @@ Retrieves a list of comments from the database relating to a specific post id.
 
 **Permissions required** : None
 
-## Success Response
+### Success Response
 
 **Code** : `200 OK`
 
@@ -301,7 +317,7 @@ Retrieves a list of comments from the database relating to a specific post id.
   ]
 ```
 
-### Create A Comment
+## Create A Comment
 
 Create a comment and store it in the database.
 
@@ -313,7 +329,7 @@ Create a comment and store it in the database.
 
 **Permissions required** : None
 
-## Sample Request Object 
+### Sample Request Object 
 
 ```json
   {
@@ -325,7 +341,7 @@ Create a comment and store it in the database.
   }
 ```
 
-## Success Response
+### Success Response
 **Code** : `201 OK`
 
 ### Get Likes
@@ -340,7 +356,7 @@ Retrieve all likes from the database.
 
 **Permissions required** : None
 
-## Success Response
+### Success Response
 
 **Code** : `200 OK`
 
@@ -363,7 +379,7 @@ Retrieve all likes from the database.
   ]
 ```
 
-### Get Likes By A Specific Post Id
+## Get Likes By A Specific Post Id
 
 Retrieves a list of likes from the database relating to a specific post id.
 
@@ -375,7 +391,7 @@ Retrieves a list of likes from the database relating to a specific post id.
 
 **Permissions required** : None
 
-## Success Response
+### Success Response
 
 **Code** : `200 OK`
 
@@ -410,7 +426,7 @@ Create a like and store it in the database.
 
 **Permissions required** : None
 
-## Sample Request Object 
+### Sample Request Object 
 
 ```json
   {
@@ -419,10 +435,10 @@ Create a like and store it in the database.
   }
 ```
 
-## Success Response
+### Success Response
 **Code** : `201 OK`
 
-### User Login
+## User Login
 
 Logs in user and issues token.
 
@@ -434,7 +450,7 @@ Logs in user and issues token.
 
 **Permissions required** : None
 
-## Sample Request Object 
+### Sample Request Object 
 
 ```json
   {
@@ -443,10 +459,10 @@ Logs in user and issues token.
   }
 ```
 
-## Success Response
+### Success Response
 **Code** : `201 OK`
 
-## Failure Response
+### Failure Response
 **Code** : `401 Unauthorized`
 
 User is issued an active token
